@@ -4,6 +4,9 @@ import { SelectedBusinessContext } from "@/context/SelectedBusinessContext";
 
 function BusinessList({ businessList }) {
   const elementRef = useRef(null);
+  const { selectedBusiness, setSelectedBusiness } = useContext(
+    SelectedBusinessContext
+  );
   const slideRight = (element) => {
     element.scrollLeft += 500;
   };
@@ -33,9 +36,14 @@ function BusinessList({ businessList }) {
         className="flex overflow-scroll overflow-x-auto gap-4 scrollbar-hide scroll-smooth"
         ref={elementRef}
       >
-        {businessList.map((item, index) => (
-          <BusinessItem key={item.place_id} business={item} />
-        ))}
+        {businessList.map(
+          (item, index) =>
+            index <= 7 && (
+              <div key={index} onClick={() => setSelectedBusiness(item)}>
+                <BusinessItem business={item} />
+              </div>
+            )
+        )}
       </div>
 
       <svg

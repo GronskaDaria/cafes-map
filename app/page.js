@@ -1,13 +1,12 @@
 "use client";
-import CategoryList from "@/components/Home/CategoryList";
-import RangeSelect from "@/components/Home/RangeSelect";
-import GoogleMapView from "@/components/Home/GoogleMapView";
 import GlobalApi from "@/Shared/GlobalApi";
-import { useEffect, useState, useContext } from "react";
-import { UserLocationContext } from "@/context/UserLocationContext";
 import BusinessList from "@/components/Home/BusinessList";
-
-import Image from "next/image";
+import CategoryList from "@/components/Home/CategoryList";
+import GoogleMapView from "@/components/Home/GoogleMapView";
+import RangeSelect from "@/components/Home/RangeSelect";
+import SkeltonLoading from "@/components/SkeltonLoading";
+import { UserLocationContext } from "@/context/UserLocationContext";
+import { useContext, useEffect, useState } from "react";
 
 export default function Home() {
   const [category, setCategory] = useState();
@@ -22,20 +21,21 @@ export default function Home() {
   }, [category, radius]);
 
   const getGooglePlace = () => {
-    // if (category) {
-    //   setLoading(true);
+    if (category) {
+      setLoading(true);
 
-    GlobalApi.getGooglePlace(
-      category,
-      radius,
-      userLocation.lat,
-      userLocation.lng
-    ).then((resp) => {
-      //console.log(resp.data.product.results);
-      setBusinessList(resp.data.product.results);
-      setBusinessListOrg(resp.data.product.results);
-      setLoading(false);
-    });
+      GlobalApi.getGooglePlace(
+        category,
+        radius,
+        userLocation.lat,
+        userLocation.lng
+      ).then((resp) => {
+        // console.log(resp.data.product.results);
+        setBusinessList(resp.data.product.results);
+        setBusinessListOrg(resp.data.product.results);
+        setLoading(false);
+      });
+    }
   };
 
   return (
@@ -48,13 +48,21 @@ export default function Home() {
         <CategoryList onCategoryChange={(value) => setCategory(value)} />
         <RangeSelect onRadiusChange={(value) => setRadius(value)} />
       </div>
-      <div className="col-span-3">
-        <GoogleMapView />
+      <div className=" col-span-3">
+        <GoogleMapView businessList={businessList} />
         <div
           className="md:absolute mx-2 w-[90%] md:w-[74%]
            bottom-36 relative md:bottom-3"
         >
-          <BusinessList businessList={businessList} />
+          {!loading ? (
+            <BusinessList businessList={businessList} />
+          ) : (
+            <div className="flex gap-3">
+              {[1, 2, 3, 4, 5].map((item, index) => (
+                <SkeltonLoading key={index} />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -1,37 +1,59 @@
-"use client";
-
-import { GoogleMap, MarkerF, useJsApiLoader } from "@react-google-maps/api";
-import { useContext } from "react";
 import { UserLocationContext } from "@/context/UserLocationContext";
+import { GoogleMap, LoadScript, MarkerF } from "@react-google-maps/api";
+import React, { useContext, useEffect, useState } from "react";
+import Markers from "./Markers";
+import { SelectedBusinessContext } from "@/context/SelectedBusinessContext";
 
-function GoogleMapView() {
-  const { userLocation } = useContext(UserLocationContext);
+function GoogleMapView({ businessList }) {
+  const { userLocation, setUserLocation } = useContext(UserLocationContext);
+  //const {selectedBusiness,setSelectedBusiness}=useContext(SelectedBusinessContext)
+  const [map, setMap] = useState();
 
-  const fallbackCenter = { lat: 54.352, lng: 18.6466 };
+  const containerStyle = {
+    width: "100%",
+    height: "900px",
+  };
 
-  const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY,
-  });
+  // useEffect(()=>{
+  //   if(map&&selectedBusiness)
+  //   {
+  //    map.panTo(selectedBusiness.geometry.location);
 
-  if (!isLoaded) return null; // albo loader
-
+  //   }
+  // },[selectedBusiness])
   return (
-    <GoogleMap
-      mapContainerStyle={{ height: "70vh", width: "100%" }}
-      center={userLocation || fallbackCenter}
-      zoom={13}
-      options={{ mapId: "663608a986961a2bad72a008" }}
-    >
-      {userLocation && (
-        <MarkerF
-          position={userLocation}
-          icon={{
-            url: "/user-locator.png",
-            scaledSize: new google.maps.Size(50, 50),
-          }}
-        />
-      )}
-    </GoogleMap>
+    <div>
+      <LoadScript
+        googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_API_KEY}
+        mapIds={["663608a986961a2bad72a008"]}
+      >
+        <GoogleMap
+          mapContainerStyle={containerStyle}
+          center={userLocation}
+          //    center={
+          //   !selectedBusiness.name?userLocation:selectedBusiness.geometry.location
+          // }
+          options={{ mapId: "663608a986961a2bad72a008" }}
+          zoom={14}
+          onLoad={(map) => setMap(map)}
+        >
+          <MarkerF
+            position={userLocation}
+            icon={{
+              url: "/user-locator.png",
+              scaledSize: {
+                width: 50,
+                height: 50,
+              },
+            }}
+          />
+          {businessList.map(
+            (item, index) =>
+              index <= 7 && <Markers business={item} key={index} />
+          )}
+        </GoogleMap>
+      </LoadScript>
+    </div>
   );
 }
 

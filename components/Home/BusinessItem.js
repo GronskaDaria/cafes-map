@@ -8,7 +8,7 @@ function BusinessItem({ business }) {
     : "";
   return (
     <div
-      className="w-[195px] h-[240px] flex-shrink-0 p-2
+      className="w-[215px] h-[260px] flex-shrink-0 p-2
      rounded-lg shadow-md mb-1
      bg-white hover:scale-110 transition-all mt-[20px] cursor-pointer"
     >
@@ -17,7 +17,7 @@ function BusinessItem({ business }) {
         alt={business.name}
         width={200}
         height={200}
-        className="rounded-lg object-cover h-[120px] "
+        className="rounded-lg object-cover h-[140px] "
       />
       <h2 className="text-[15px] font-bold mt-1 line-clamp-1">
         {business.name}

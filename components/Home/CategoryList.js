@@ -8,7 +8,7 @@ function CategoryList({ onCategoryChange }) {
   const [selectedCategory, setSelectedCategory] = useState();
   return (
     <div>
-      <h2 className="font-bold px-2 p-3">Select Food Type</h2>
+      <h2 className="font-bold px-2 p-3 text-[18px]">Select Food Type</h2>
       <div
         className="grid 
         grid-cols-2 
@@ -22,7 +22,7 @@ function CategoryList({ onCategoryChange }) {
                 justify-center items-center bg-gray-100
                 p-2 m-2 rounded-lg grayscale 
                 hover:grayscale-0 cursor-pointer
-                text-[13px]
+                text-[15px]
                  border-purple-400
                 ${
                   selectedCategory == index ? "grayscale-0 border-[1px]" : null
