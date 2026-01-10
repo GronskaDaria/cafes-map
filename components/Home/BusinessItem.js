@@ -1,31 +1,45 @@
 import Image from "next/image";
-import React from "react";
+import React, { useContext } from "react";
+import { SelectedBusinessContext } from "@/context/SelectedBusinessContext";
 
-function BusinessItem({ business }) {
+function BusinessItem({ business, showClose = false }) {
+  const { setSelectedBusiness } = useContext(SelectedBusinessContext);
   const GOOGLE_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_API_KEY;
   const photo_ref = business?.photos
     ? business?.photos[0]?.photo_reference
     : "";
+
   return (
     <div
       className="w-[215px] h-[260px] flex-shrink-0 p-2
-     rounded-lg shadow-md mb-1
-     bg-white hover:scale-110 transition-all mt-[20px] cursor-pointer"
+                 rounded-lg shadow-md mb-1
+                 bg-white hover:scale-110 transition-all mt-[20px] relative cursor-pointer"
     >
+      {showClose && (
+        <button
+          className="absolute bottom-5 left-1/2 transform -translate-x-1/2 
+             text-white bg-gray-500 rounded-full w-5 h-5 
+             flex items-center justify-center text-xs z-10"
+          onClick={(e) => {
+            e.stopPropagation(); // nie zamyka markera
+            setSelectedBusiness(null);
+          }}
+        >
+          ×
+        </button>
+      )}
+
       <Image
         src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photo_ref}&key=${GOOGLE_API_KEY}`}
         alt={business.name}
         width={200}
         height={200}
-        className="rounded-lg object-cover h-[140px] "
+        className="rounded-lg object-cover h-[140px]"
       />
       <h2 className="text-[15px] font-bold mt-1 line-clamp-1">
         {business.name}
       </h2>
-      <h2
-        className="text-[12px] text-gray-400 
-                line-clamp-2"
-      >
+      <h2 className="text-[12px] text-gray-400 line-clamp-2">
         {business.formatted_address}
       </h2>
       <div className="flex gap-1 items-center">
@@ -43,14 +57,6 @@ function BusinessItem({ business }) {
         </svg>
         <h2 className="text-[12px] font-bold">{business.rating}</h2>
       </div>
-      {/* {showDir?  <div className='border-t-[1px] p-1 mt-1'>
-              <h2 className='text-[#0075ff]
-              flex justify-between items-center'>Dist: {distance} Mile 
-              <span className='border-[1px] p-1 rounded-full
-              border-blue-500
-              hover:text-white
-              hover:bg-blue-500' onClick={()=>onDirectionClick()} >Get Direction</span></h2>
-            </div>:null} */}
     </div>
   );
 }

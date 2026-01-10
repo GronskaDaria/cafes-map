@@ -7,31 +7,27 @@ function Markers({ business }) {
   const { selectedBusiness, setSelectedBusiness } = useContext(
     SelectedBusinessContext
   );
+
   return (
-    <div>
-      <MarkerF
-        position={business.geometry.location}
-        onClick={() => setSelectedBusiness(business)}
-        icon={{
-          url: "/circle.png",
-          scaledSize: {
-            width: 17,
-            height: 17,
-          },
-        }}
-      >
-        {selectedBusiness.reference == business.reference ? (
-          <OverlayView
-            position={business.geometry.location}
-            mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
-          >
-            <div className="ml-[-90px] mt-[-230px]">
-              <BusinessItem business={business} /*showDir={true}*/ />
-            </div>
-          </OverlayView>
-        ) : null}
-      </MarkerF>
-    </div>
+    <MarkerF
+      position={business.geometry.location}
+      onClick={() => setSelectedBusiness(business)}
+      icon={{
+        url: "/circle.png",
+        scaledSize: { width: 17, height: 17 },
+      }}
+    >
+      {selectedBusiness?.reference === business.reference && (
+        <OverlayView
+          position={business.geometry.location}
+          mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+        >
+          <div className="ml-[-90px] mt-[-230px]">
+            <BusinessItem business={business} showClose={true} />
+          </div>
+        </OverlayView>
+      )}
+    </MarkerF>
   );
 }
 

@@ -6,7 +6,6 @@ import { SelectedBusinessContext } from "@/context/SelectedBusinessContext";
 
 function GoogleMapView({ businessList }) {
   const { userLocation, setUserLocation } = useContext(UserLocationContext);
-  //const {selectedBusiness,setSelectedBusiness}=useContext(SelectedBusinessContext)
   const [map, setMap] = useState();
 
   const containerStyle = {
@@ -14,13 +13,6 @@ function GoogleMapView({ businessList }) {
     height: "900px",
   };
 
-  // useEffect(()=>{
-  //   if(map&&selectedBusiness)
-  //   {
-  //    map.panTo(selectedBusiness.geometry.location);
-
-  //   }
-  // },[selectedBusiness])
   return (
     <div>
       <LoadScript
@@ -30,9 +22,6 @@ function GoogleMapView({ businessList }) {
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={userLocation}
-          //    center={
-          //   !selectedBusiness.name?userLocation:selectedBusiness.geometry.location
-          // }
           options={{ mapId: "663608a986961a2bad72a008" }}
           zoom={14}
           onLoad={(map) => setMap(map)}
