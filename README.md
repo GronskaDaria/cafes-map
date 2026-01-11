@@ -53,3 +53,16 @@ Projekt podzielony jest na logiczne moduły, co ułatwia jego rozwój:
    cd cafes-map
    npm install
    npm run dev
+
+   ## 📝 Planowane Rozszerzenia (TODO)
+
+W ramach dalszego rozwoju projektu planowane jest wprowadzenie następujących funkcjonalności:
+
+### 🛠 Poprawki i Optymalizacja UI/UX
+- [ ] **Naprawa widoczności listy:** Rozwiązanie problemu znikania komponentu `BusinessList` po wywołaniu funkcji wyszukiwania w `HeaderNavBar`.
+- [ ] **Przycisk "Mój widok":** Dodanie przycisku umożliwiającego natychmiastowy powrót (recenter) mapy do pierwotnie wybranej lub aktualnej lokalizacji użytkownika.
+
+### 🚀 Nowe Funkcjonalności
+- [ ] **Dynamiczne odświeżanie mapy:** Implementacja funkcji "Szukaj w tym obszarze" – automatyczne dociąganie i wyświetlanie nowych miejsc na bieżąco podczas przesuwania (scrollowania) mapy przez użytkownika.
+- [ ] **System Autoryzacji:** Dodanie modułu logowania użytkowników (np. przy użyciu NextAuth.js lub Firebase).
+- [ ] **Ulubione Miejsca:** Możliwość dodawania kawiarni do listy ulubionych i zapisywania ich w bazie danych (MongoDB) przypisanej do konta użytkownika.
