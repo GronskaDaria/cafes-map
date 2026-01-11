@@ -54,7 +54,7 @@ Projekt podzielony jest na logiczne moduły, co ułatwia jego rozwój:
    npm install
    npm run dev
 
-   ## 📝 Planowane Rozszerzenia (TODO)
+## 📝 Planowane Rozszerzenia (TODO)
 
 W ramach dalszego rozwoju projektu planowane jest wprowadzenie następujących funkcjonalności:
 
