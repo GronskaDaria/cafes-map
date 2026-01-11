@@ -65,4 +65,4 @@ W ramach dalszego rozwoju projektu planowane jest wprowadzenie następujących f
 ### 🚀 Nowe Funkcjonalności
 - [ ] **Dynamiczne odświeżanie mapy:** Implementacja funkcji "Szukaj w tym obszarze" – automatyczne dociąganie i wyświetlanie nowych miejsc na bieżąco podczas przesuwania (scrollowania) mapy przez użytkownika.
 - [ ] **System Autoryzacji:** Dodanie modułu logowania użytkowników (np. przy użyciu NextAuth.js lub Firebase).
-- [ ] **Ulubione Miejsca:** Możliwość dodawania kawiarni do listy ulubionych i zapisywania ich w bazie danych (MongoDB) przypisanej do konta użytkownika.
+- [ ] **Ulubione Miejsca:** Możliwość dodawania kawiarni do listy ulubionych
